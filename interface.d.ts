@@ -643,7 +643,10 @@ export function history_recommend_songs_detail(
 ): Promise<Response>
 
 export function homepage_block_page(
-  params: { refresh?: 'true' | 'false' | boolean } & RequestBaseConfig,
+  params: {
+    refresh?: 'true' | 'false' | boolean
+    cursor?: string
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function homepage_dragon_ball(
@@ -691,6 +694,14 @@ export function login_cellphone(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function login_cellphone(
+  params: {
+    phone: number | string
+    countrycode?: number | string
+    captcha: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function login_refresh(params: RequestBaseConfig): Promise<Response>
 
 export function login_status(params: RequestBaseConfig): Promise<Response>
@@ -698,6 +709,10 @@ export function login_status(params: RequestBaseConfig): Promise<Response>
 export function logout(params: RequestBaseConfig): Promise<Response>
 
 export function lyric(
+  params: { id: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function lyric_new(
   params: { id: string | number } & RequestBaseConfig,
 ): Promise<Response>
 
@@ -1045,6 +1060,17 @@ export function song_url(
   params: { id: string | number; br?: string | number } & RequestBaseConfig,
 ): Promise<Response>
 
+export const enum SoundQualityType {
+  standard = 'standard',
+  exhigh = 'exhigh',
+  lossless = 'lossless',
+  hires = 'hires',
+}
+
+export function song_url_v1(
+  params: { id: string | number; level: SoundQualityType } & RequestBaseConfig,
+): Promise<Response>
+
 export function top_album(
   params: {
     area?: AlbumListArea
@@ -1285,17 +1311,11 @@ export function yunbei_info(params: RequestBaseConfig): Promise<Response>
 export function yunbei_sign(params: RequestBaseConfig): Promise<Response>
 
 export function yunbei_receipt(
-  params: {
-    limit?: number | string
-    offset?: number | string
-  } & RequestBaseConfig,
+  params: MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
 
 export function yunbei_expense(
-  params: {
-    limit?: number | string
-    offset?: number | string
-  } & RequestBaseConfig,
+  params: MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
 
 export function yunbei_tasks(params: RequestBaseConfig): Promise<Response>
@@ -1331,17 +1351,11 @@ export function comment_hug_list(
 ): Promise<Response>
 
 export function topic_sublist(
-  params: {
-    limit?: number | string
-    offset?: number | string
-  } & RequestBaseConfig,
+  params: MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
 
 export function topic_sublist(
-  params: {
-    limit?: number | string
-    offset?: number | string
-  } & RequestBaseConfig,
+  params: MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
 
 export function artist_new_mv(
@@ -1364,7 +1378,14 @@ export function artist_detail(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function cloud(params: RequestBaseConfig): Promise<Response>
+export function cloud(
+  params: {
+    songFile: {
+      name: string
+      data: Buffer
+    }
+  } & RequestBaseConfig,
+): Promise<Response>
 
 export function topic_detail(
   params: {
@@ -1409,3 +1430,261 @@ export function user_bindingcellphone(
 export function listen_together_status(
   params: RequestBaseConfig,
 ): Promise<Response>
+
+export function user_comment_history(
+  params: {
+    limit?: number | string
+    uid: number | string
+    time?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function cloud_match(
+  params: {
+    uid: number | string
+    sid: number | string
+    asid: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function yunbei_rcmd_song(
+  params: {
+    id: number | string
+    reason?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function yunbei_rcmd_song_history(
+  params: {
+    size?: number | string
+    cursor?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function song_purchased(
+  params: MultiPageConfig & RequestBaseConfig,
+): Promise<Response>
+
+export function mlog_url(
+  params: {
+    id?: number | string
+    res?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function mlog_to_video(
+  params: {
+    id?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_growthpoint(params: RequestBaseConfig): Promise<Response>
+
+export function vip_growthpoint_details(
+  params: MultiPageConfig & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_tasks(params: RequestBaseConfig): Promise<Response>
+
+export function vip_growthpoint_get(
+  params: {
+    ids?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function artist_fans(
+  params: { id: number | string } & MultiPageConfig & RequestBaseConfig,
+): Promise<Response>
+
+export function digitalAlbum_detail(
+  params: {
+    id: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function digitalAlbum_sales(
+  params: {
+    ids: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function musician_data_overview(
+  params: RequestBaseConfig,
+): Promise<Response>
+
+export function musician_play_trend(
+  params: {
+    startTime: number | string
+    endTime: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function musician_tasks(params: RequestBaseConfig): Promise<Response>
+
+export function musician_cloudbean(params: RequestBaseConfig): Promise<Response>
+
+export function musician_cloudbean_obtain(
+  params: {
+    id: number | string
+    period: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_info(params: RequestBaseConfig): Promise<Response>
+
+export function musician_sign(params: RequestBaseConfig): Promise<Response>
+
+export function song_download_url(
+  params: {
+    id: number | string
+    br?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function playlist_track_all(
+  params: {
+    id: number | string
+    s?: number | string
+  } & MultiPageConfig &
+    RequestBaseConfig,
+): Promise<Response>
+
+export function artist_video(
+  params: {
+    id: number | string
+    size?: number | string
+    cursor?: number | string
+    order?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function sign_happy_info(params: RequestBaseConfig): Promise<Response>
+
+export function record_recent_song(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_video(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_voice(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_playlist(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_album(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_dj(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function signin_progress(
+  params: {
+    moduleId?: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function nickname_check(
+  params: {
+    nickname: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function musician_tasks_new(params: RequestBaseConfig): Promise<Response>
+
+export function playlist_update_playcount(
+  params: {
+    id?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_timemachine(
+  params: {
+    startTime?: number | string
+    endTime?: number | string
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function song_wiki_summary(
+  params: {
+    id: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function sheet_list(
+  params: {
+    id: number | string
+    abTest?: 'a' | 'b'
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function sheet_preview(
+  params: {
+    id: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function style_list(params: RequestBaseConfig): Promise<Response>
+
+export function style_preference(params: RequestBaseConfig): Promise<Response>
+
+export function style_detail(
+  params: {
+    tagId: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function style_song(
+  params: {
+    tagId: number | string
+    size?: number | string
+    cursor?: number | string
+    sort?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function style_album(
+  params: {
+    tagId: number | string
+    size?: number | string
+    cursor?: number | string
+    sort?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function style_playlist(
+  params: {
+    tagId: number | string
+    size?: number | string
+    cursor?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function style_artist(
+  params: {
+    tagId: number | string
+    size?: number | string
+    cursor?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function pl_count(params: RequestBaseConfig): Promise<Response>

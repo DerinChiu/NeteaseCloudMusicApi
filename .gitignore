@@ -4,3 +4,5 @@ node_modules
 .idea
 .vscode
 .history
+examples/moddef.json
+bin
